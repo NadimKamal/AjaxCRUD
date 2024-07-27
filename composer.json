@@ -7,7 +7,11 @@
     "require": {
         "php": "^8.2",
         "laravel/framework": "^11.9",
-        "laravel/tinker": "^2.9"
+        "laravel/tinker": "^2.9",
+        "limitlessmaterial/actions": "^1.0",
+        "limitlessmaterial/datadisplay": "^1.0",
+        "limitlessmaterial/dataentry": "^1.0",
+        "themegenie/limitlessmaterial": "^1.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
@@ -63,6 +67,18 @@
     "minimum-stability": "stable",
     "prefer-stable": true,
     "repositories": {
+        "limitlessmaterial-dataentry": {
+            "type": "path",
+            "url": "..\\applets\\AjaxCRUDPackages\\limitlessmaterial-dataentry"
+        },
+        "limitlessmaterial-datadisplay": {
+            "type": "path",
+            "url": "..\\applets\\AjaxCRUDPackages\\limitlessmaterial-datadisplay"
+        },
+        "limitlessmaterial-actions": {
+            "type": "path",
+            "url": "..\\applets\\AjaxCRUDPackages\\limitlessmaterial-actions"
+        },
         "themegenie-limitlessmaterial": {
             "type": "path",
             "url": "..\\applets\\AjaxCRUDPackages\\themegenie-limitlessmaterial"

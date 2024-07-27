@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7e8c3c14ff33b199b4a0838993eb8423",
+    "content-hash": "11278a9d3a6ef8c5b2d529bcc0ad1dc3",
     "packages": [
         {
             "name": "brick/math",
@@ -1815,6 +1815,129 @@
                 }
             ],
             "time": "2024-01-28T23:22:08+00:00"
+        },
+        {
+            "name": "limitlessmaterial/actions",
+            "version": "1.0.0",
+            "dist": {
+                "type": "path",
+                "url": "../applets/AjaxCRUDPackages/limitlessmaterial-actions",
+                "reference": "a379fcec3319932f2ec0781ccb2309cbe17808ac"
+            },
+            "type": "library",
+            "extra": {
+                "copyright": "www.pondit.com",
+                "laravel": {
+                    "providers": [
+                        "Themegenie\\Actions\\ActionsServiceProvider"
+                    ],
+                    "aliases": []
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Themegenie\\Actions\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pondit",
+                    "email": "info@pondit.com",
+                    "homepage": "www.pondit.com"
+                }
+            ],
+            "description": "Themegenie Actions",
+            "keywords": [
+                "Laravel"
+            ],
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "limitlessmaterial/datadisplay",
+            "version": "1.0.0",
+            "dist": {
+                "type": "path",
+                "url": "../applets/AjaxCRUDPackages/limitlessmaterial-datadisplay",
+                "reference": "60fc046e4b0c9b79a1f16fbcc541cacd0ded2b0b"
+            },
+            "type": "library",
+            "extra": {
+                "copyright": "www.pondit.com",
+                "laravel": {
+                    "providers": [
+                        "Themegenie\\DataDisplay\\DataDisplayServiceProvider"
+                    ],
+                    "aliases": []
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Themegenie\\DataDisplay\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pondit",
+                    "email": "info@pondit.com",
+                    "homepage": "www.pondit.com"
+                }
+            ],
+            "description": "Themegenie DataDisplay",
+            "keywords": [
+                "Laravel"
+            ],
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "limitlessmaterial/dataentry",
+            "version": "1.0.0",
+            "dist": {
+                "type": "path",
+                "url": "../applets/AjaxCRUDPackages/limitlessmaterial-dataentry",
+                "reference": "0915feeadbc7020c15603a04c2ca194b798da034"
+            },
+            "type": "library",
+            "extra": {
+                "copyright": "www.pondit.com",
+                "laravel": {
+                    "providers": [
+                        "Themegenie\\DataEntry\\DataEntryServiceProvider"
+                    ],
+                    "aliases": []
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Themegenie\\DataEntry\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pondit",
+                    "email": "info@pondit.com",
+                    "homepage": "www.pondit.com"
+                }
+            ],
+            "description": "Themegenie Form Fields",
+            "keywords": [
+                "Laravel"
+            ],
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "monolog/monolog",
@@ -5407,6 +5530,47 @@
                 }
             ],
             "time": "2024-06-28T08:00:31+00:00"
+        },
+        {
+            "name": "themegenie/limitlessmaterial",
+            "version": "1.0.0",
+            "dist": {
+                "type": "path",
+                "url": "../applets/AjaxCRUDPackages/themegenie-limitlessmaterial",
+                "reference": "9faef7d22fd791b586054c9bb7e87a910af838a8"
+            },
+            "type": "library",
+            "extra": {
+                "copyright": "www.pondit.com",
+                "laravel": {
+                    "providers": [
+                        "Themegenie\\LimitlessMaterial\\LimitlessMaterialServiceProvider"
+                    ],
+                    "aliases": []
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Themegenie\\LimitlessMaterial\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pondit",
+                    "email": "info@pondit.com",
+                    "homepage": "http://www.pondit.com"
+                }
+            ],
+            "description": "Laravel component based theme built on limitless material",
+            "keywords": [
+                "Laravel"
+            ],
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
