@@ -10,7 +10,15 @@ class AjaxCrudController extends Controller {
      * Display a listing of the resource.
      */
     public function index() {
+        // dd($users);
         return view('index');
+    }
+    
+    public function ajaxData() {
+        $users = AjaxCrud::latest()->get();
+        return response()->json([
+            'users' => $users,
+        ]);
     }
 
     /**
@@ -32,15 +40,25 @@ class AjaxCrudController extends Controller {
             'name'  => $request->name,
             'email' => $request->email,
         ]);
+        if($request->expectsJson()){
 
-        // $user = new AjaxCrud();
+            return response()->json([
+                'success' => true,
+                'msg'=>'Successfully creayted.'
+            ]);
+        }
 
-        // $user->name = $request->name;
-        // $user->email = $request->email;
 
-        // $user->save();
+        // return view('index');
 
-        // return response()->json(['success' => 'User created successfully']);
+        $user = new AjaxCrud();
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+
+        $user->save();
+
+        return response()->json(['success' => 'User created successfully']);
     }
 
     /**

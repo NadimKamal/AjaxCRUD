@@ -32,29 +32,105 @@
                             <th width="20%" scope="col">{{ __('Action') }}</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <th width="10%" scope="row">1</th>
-                            <td width="35%">Mark</td>
-                            <td width="35%">Otto</td>
+                    <tbody id="tableBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    @include('edit-user-modal');
+    @include('add-user-modal');
+    @include('ajaxSetup');
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
+    <script>
+        $(document).ready(function() {
+            let tableBody = $('#tableBody');
+            getData();
+
+            function getData() {
+                $.ajax({
+                    url: "{{ route('ajax.data') }}",
+                    method: 'get',
+                    data: {},
+                    success: function(response) {
+                        // console.log(response.users);
+                        if ((response.users).length > 0) {
+                            (response.users).forEach((item, index) => {
+                                tableBody.append(
+                                    `<tr>
+                            <th width="10%" scope="row">${index+1}</th>
+                            <td width="35%">${item.name}</td>
+                            <td width="35%">${item.email}</td>
                             <td width="20%">
-                                <button type="button" class="btn btn-primary" id="edit-btn">
+                                <button type="button" class="btn btn-primary" class="edit-btn" data-bs-toggle="modal" data-bs-target="#editUserModal">
                                     <i class="las la-pen-nib"></i>
                                 </button>
                                 <button type="button" class="btn btn-danger" id="delete-btn">
                                     <i class="las la-trash-alt"></i>
                                 </button>
                             </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-    @include('add-user-modal');
-    @include('userJs');
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+                        </tr>`
+                                );
+                            });
+                        } else {
+                            tableBody.append(`<tr>
+                            <td colspan='4' class='text-danger text-center'>No Data Found.</td>
+                            </tr>`);
+                        }
+                        // if ((response.users).length > 0) {
+                        //     $.each(response.users, function(){
+                        //         tableBody.append(
+                        //             `<tr>
+                    //                 <td>nadim</td>
+                    //                 <td>nadim</td>
+                    //                 <td>nadim</td>
+                    //                 <td>nadim</td>
+                    //                 </tr>`;
+                        //         );
+                        //     });
+                        // } else {
+
+                        // }
+                    },
+                    error: function(err) {
+                        console.error(err);
+                    }
+                });
+            }
+
+            $(document).on('click', '#save-btn', function(e) {
+                e.preventDefault();
+                let name = $('#name').val();
+                let email = $('#email').val();
+                // console.log(name);
+                // console.log(email);
+
+                $.ajax({
+                    url: "{{ route('user.store') }}",
+                    method: 'post',
+                    data: {
+                        name: name,
+                        email: email
+                    },
+                    success: function(response) {
+                        $('#name').val('');
+                        $('#email').val('');
+                        tableBody.empty();
+                        getData();
+                    },
+                    error: function(err) {
+                        let error = err.responseJSON;
+                        $.each(error.errors, function(index, value) {
+                            $('#error-msg').append('<span class="text-danger m-2">' +
+                                value +
+                                '</span>' + '</br>');
+                        });
+                    }
+                });
+            });
+        });
     </script>
 </body>
 

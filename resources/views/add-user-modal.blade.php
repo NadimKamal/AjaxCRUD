@@ -23,7 +23,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Close') }}</button>
-                <button type="button" class="btn btn-primary" id="save-btn">{{ __('Save') }}</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="save-btn">{{ __('Save') }}</button>
             </div>
         </div>
     </div>
