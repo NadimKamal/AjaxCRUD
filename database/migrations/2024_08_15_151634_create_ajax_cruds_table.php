@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('ajax_cruds', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid');
             $table->string('name','255')->nullable();
             $table->string('email','255')->unique()->nullable();
             $table->timestamps();

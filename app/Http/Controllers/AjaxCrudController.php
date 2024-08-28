@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AjaxCrud;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class AjaxCrudController extends Controller {
     /**
@@ -13,7 +14,7 @@ class AjaxCrudController extends Controller {
         // dd($users);
         return view('index');
     }
-    
+
     public function ajaxData() {
         $users = AjaxCrud::latest()->get();
         return response()->json([
@@ -37,26 +38,25 @@ class AjaxCrudController extends Controller {
             'email' => 'required|email|unique:ajax_cruds',
         ]);
         AjaxCrud::create([
+            'uuid'  => Str::uuid(),
             'name'  => $request->name,
             'email' => $request->email,
         ]);
-        if($request->expectsJson()){
-
+        if ($request->expectsJson()) {
             return response()->json([
                 'success' => true,
-                'msg'=>'Successfully creayted.'
+                'msg'     => 'Successfully created.',
             ]);
         }
 
-
         // return view('index');
 
-        $user = new AjaxCrud();
+        // $user = new AjaxCrud();
 
-        $user->name = $request->name;
-        $user->email = $request->email;
+        // $user->name = $request->name;
+        // $user->email = $request->email;
 
-        $user->save();
+        // $user->save();
 
         return response()->json(['success' => 'User created successfully']);
     }
@@ -71,15 +71,32 @@ class AjaxCrudController extends Controller {
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(AjaxCrud $ajaxCrud) {
-        //
+    public function edit($uuid) {
+
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, AjaxCrud $ajaxCrud) {
-        //
+    public function update(Request $request, $uuid) {
+
+        $user = AjaxCrud::where('uuid', $uuid)->first();
+
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:ajax_cruds',
+        ]);
+
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+        ]);
+
+
+
+        return response()->json([
+            'user' => $user,
+        ]);
     }
 
     /**

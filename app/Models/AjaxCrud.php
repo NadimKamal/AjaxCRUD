@@ -10,6 +10,7 @@ class AjaxCrud extends Model
     use HasFactory;
 
     protected $fillable = [
+        'uuid',
         'name',
         'email',
     ];

@@ -58,15 +58,16 @@
                         // console.log(response.users);
                         if ((response.users).length > 0) {
                             (response.users).forEach((item, index) => {
+                                // console.log(item.uuid);
                                 tableBody.append(
                                     `<tr>
-                            <th width="10%" scope="row">${index+1}</th>
+                            <th width="10%" scope="row">${++index}</th>
                             <td width="35%">${item.name}</td>
                             <td width="35%">${item.email}</td>
                             <td width="20%">
-                                <button type="button" class="btn btn-primary" class="edit-btn" data-bs-toggle="modal" data-bs-target="#editUserModal">
+                                <a data-uuid="${item.uuid}" data-name="${item.name}" data-email="${item.email}" class="btn btn-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editUserModal">
                                     <i class="las la-pen-nib"></i>
-                                </button>
+                                </a>
                                 <button type="button" class="btn btn-danger" id="delete-btn">
                                     <i class="las la-trash-alt"></i>
                                 </button>
@@ -129,6 +130,43 @@
                         });
                     }
                 });
+            });
+
+            $(document).on('click','.edit-btn',function(){
+                let editUuid = $('#edit-uuid');
+                let editName = $('#edit-name');
+                let editEmail = $('#edit-email');
+
+                let uuid = $(this).attr('data-uuid');
+                let name = $(this).attr('data-name');
+                let email = $(this).attr('data-email');
+
+                editName.val(name);
+                editEmail.val(email);
+                editUuid.val(uuid);
+            });
+
+
+            let updateUrlTemplate = "{{route('user.update',':uuid')}}";
+
+            $(document).on('click','#update-btn',function(){
+                let uuid = $('#edit-uuid').val();
+                let name = $('#edit-name').val();
+                let email = $('#edit-email').val();
+                let updateUrl = updateUrlTemplate.replace(':uuid',uuid);
+
+                $.ajax({
+                    url: updateUrl,
+                    method:'patch',
+                    data:{
+                        name:name,
+                        email:email
+                    },
+                    success: function(response){
+                        tableBody.empty();
+                        getData();
+                    },
+                })
             });
         });
     </script>
