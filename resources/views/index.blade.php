@@ -68,7 +68,7 @@
                                 <a data-uuid="${item.uuid}" data-name="${item.name}" data-email="${item.email}" class="btn btn-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editUserModal">
                                     <i class="las la-pen-nib"></i>
                                 </a>
-                                <button type="button" class="btn btn-danger" id="delete-btn">
+                                <button type="submit" delete-uuid="${item.uuid}" class="btn btn-danger delete-btn">
                                     <i class="las la-trash-alt"></i>
                                 </button>
                             </td>
@@ -77,7 +77,9 @@
                             });
                         } else {
                             tableBody.append(`<tr>
-                            <td colspan='4' class='text-danger text-center'>No Data Found.</td>
+                            <td colspan='4' class='text-danger text-center'>
+                                <b>No Data Found.</b>
+                            </td>
                             </tr>`);
                         }
                         // if ((response.users).length > 0) {
@@ -118,7 +120,7 @@
                     success: function(response) {
                         $('#name').val('');
                         $('#email').val('');
-                        tableBody.empty();
+                        tableBody.html('');
                         getData();
                     },
                     error: function(err) {
@@ -163,10 +165,29 @@
                         email:email
                     },
                     success: function(response){
-                        tableBody.empty();
+                        tableBody.html('');
                         getData();
                     },
                 })
+            });
+
+            let deleteUrlTemplate = "{{route('user.delete',':uuid')}}";
+            $(document).on('click','.delete-btn' ,function(){
+                let deleteUuid = $(this).attr('delete-uuid');
+                let deleteUrl = deleteUrlTemplate.replace(':uuid',deleteUuid);
+
+                $.ajax({
+                    url: deleteUrl,
+                    method: 'delete',
+                    data:{},
+
+                    success: function(response){
+                        tableBody.html('');
+                        getData();
+                    },
+                });
+
+                
             });
         });
     </script>

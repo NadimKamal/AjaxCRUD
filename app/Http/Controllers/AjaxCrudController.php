@@ -57,8 +57,6 @@ class AjaxCrudController extends Controller {
         // $user->email = $request->email;
 
         // $user->save();
-
-        return response()->json(['success' => 'User created successfully']);
     }
 
     /**
@@ -83,26 +81,27 @@ class AjaxCrudController extends Controller {
         $user = AjaxCrud::where('uuid', $uuid)->first();
 
         $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:ajax_cruds',
+            'name'  => 'required',
+            'email' => 'required|email|unique:ajax_cruds,email,'.$user->uuid,
         ]);
 
         $user->update([
-            'name' => $request->name,
+            'name'  => $request->name,
             'email' => $request->email,
         ]);
 
-
-
-        return response()->json([
-            'user' => $user,
-        ]);
+        // return response()->json([
+        //     'user' => $user,
+        // ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(AjaxCrud $ajaxCrud) {
-        //
+    public function destroy(AjaxCrud $ajaxCrud, $uuid) {
+
+        $user = AjaxCrud::where('uuid',$uuid)->first();
+
+        $user->delete();
     }
 }
